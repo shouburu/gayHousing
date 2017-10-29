@@ -7,16 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
-
 @Entity
-@Table(name = "USER_TBL")
+@Table(name = "users")
 public class Users {
 
     @Id
     @GeneratedValue
     @Column(name = "user_id")
-    private Integer user_id;
+    private int user_id;
 
     @Column(name = "display_name",unique = true)
     @Size(max = 200, min = 3)
@@ -34,12 +32,21 @@ public class Users {
     @Size(max = 100, min = 8)
     private String password;
 
+    public Users () {}
 
-    public Integer getUser_id() {
+    public Users(int user_id, String display_name, String first_name, String last_name, String password) {
+        this.user_id = user_id;
+        this.display_name = display_name;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+    }
+
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
@@ -75,5 +82,27 @@ public class Users {
         this.password = password;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Users)) return false;
 
+        Users users = (Users) o;
+
+        if (user_id != users.user_id) return false;
+        if (!display_name.equals(users.display_name)) return false;
+        if (!first_name.equals(users.first_name)) return false;
+        if (!last_name.equals(users.last_name)) return false;
+        return password.equals(users.password);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = user_id;
+        result = 31 * result + display_name.hashCode();
+        result = 31 * result + first_name.hashCode();
+        result = 31 * result + last_name.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
+    }
 }
