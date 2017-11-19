@@ -26,10 +26,14 @@ public class WelcomeController {
 
         System.out.println("\nInside the Controller\n");
 
-        Users test = usersService.get(1);
-        System.out.println("user name is :" + test.getDisplay_name());
+        Users user = usersService.get(1);
+        System.out.println("\nuser value last name is " + user.getFirst_name());
+
+//        Users test = usersService.get(1);
+//        System.out.println("user name is :" + test.getDisplay_name());
 
         model.put("time", new Date());
+//        model.put("message", user.getLast_name());
         model.put("message", this.message);
         return "welcome";
     }

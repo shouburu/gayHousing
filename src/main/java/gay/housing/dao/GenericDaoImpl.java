@@ -19,7 +19,7 @@ public abstract class GenericDaoImpl<E, K extends Serializable> implements Gener
 
     @Autowired
     private SessionFactory sessionFactory;
-
+//
     protected Class<? extends E> daoType;
 
     /**
