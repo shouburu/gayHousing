@@ -14,7 +14,7 @@ public class Users {
     @Id
     @GeneratedValue
     @Column(name = "user_id")
-    private int user_id;
+    private Integer user_id;
 
     @Column(name = "display_name",unique = true)
     @Size(max = 200, min = 3)
@@ -34,7 +34,7 @@ public class Users {
 
     public Users () {}
 
-    public Users(int user_id, String display_name, String first_name, String last_name, String password) {
+    public Users(Integer user_id, String display_name, String first_name, String last_name, String password) {
         this.user_id = user_id;
         this.display_name = display_name;
         this.first_name = first_name;
@@ -42,11 +42,11 @@ public class Users {
         this.password = password;
     }
 
-    public int getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
@@ -98,7 +98,7 @@ public class Users {
 
     @Override
     public int hashCode() {
-        int result = user_id;
+        Integer result = user_id;
         result = 31 * result + display_name.hashCode();
         result = 31 * result + first_name.hashCode();
         result = 31 * result + last_name.hashCode();

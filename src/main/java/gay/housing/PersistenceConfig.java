@@ -19,8 +19,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource({ "classpath:application.properties" })
-//@ComponentScan({ "gay.housing" })
-//@ComponentScan({ "gay.housing.controller" })
+@ComponentScan({ "gay.housing","gay.housing.controller"  })
 public class PersistenceConfig {
 
     @Autowired
@@ -68,12 +67,13 @@ public class PersistenceConfig {
     Properties hibernateProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto",
-                        env.getProperty("hibernate.hbm2ddl.auto"));
-                setProperty("hibernate.dialect",
-                        env.getProperty("hibernate.dialect"));
-                setProperty("hibernate.globally_quoted_identifiers",
-                        "true");
+                setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+                setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+                setProperty("hibernate.use_sql_comments", env.getProperty("hibernate.use_sql_comments"));
+                setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+                setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+                setProperty("hibernate.globally_quoted_identifiers","true");
+
             }
         };
     }
