@@ -43,45 +43,30 @@ public class WelcomeController {
     @GetMapping("/")
     public String welcome(Map<String, Object> model) throws java.lang.Exception, java.sql.SQLException {
 
-        System.out.println("\nInside the Controller\n");
+//        Connection connection;
+//        Statement statement;
+//        ResultSet resultSet;
+//        connection = dataSource.getConnection();
+//        statement = connection.createStatement();
+//        statement.setQueryTimeout(15);
+//        resultSet = statement.executeQuery("SELECT * from users where user_id = 2");
+//        while(  resultSet.next() ) {
+//            System.out.println("There was something in result set");
+//            System.out.println(resultSet.getString(5));
+//        }
+        System.out.println("Starting call");
 
-        Connection connection;
-        Statement statement;
-        ResultSet resultSet;
-            connection = dataSource.getConnection();
-            if (!connection.isValid(10)) {
-                throw new Exception("Unable to connect to database");
-            }
-            System.out.println("Successfully connected to "
-                    + connection.getMetaData().getDatabaseProductName());
-            System.out.println((connection.isValid(8) ? "Valid Connection" : "Not Working"));
-        System.out.println(connection.getMetaData().toString());
-        System.out.println(connection.getCatalog());
-        System.out.println(connection.isClosed());
-
-        statement = connection.createStatement();
-
-        statement.setQueryTimeout(15);
-        resultSet = statement.executeQuery("SELECT * from users where user_id = 2");
-        while(  resultSet.next() ) {
-            System.out.println("There was something in result set");
-            System.out.println(resultSet.getString(5));
-            System.out.println(resultSet.getString(4));
-            System.out.println(resultSet.getString(3));
-            System.out.println(resultSet.getString(2));
-        }
-//            Users users = resultSet.
-            System.out.println("\nuser value last name is " + resultSet.getFetchSize());
-
-
-        //        Users user = usersService.get(new Integer(1));
-//        Users test = usersService.get(1);
-//        System.out.println("user name is :" + test.getDisplay_name());
-
+        Users user = usersService.get(new Integer(2));
+        System.out.println("Finished user service" + user.getFirst_name());
         model.put("time", new Date());
-//        model.put("message", user.getLast_name());
         model.put("message", this.message);
         return "welcome";
+    }
+
+    @RequestMapping("/login")
+    public String login(Map<String,Object> model) {
+
+        return "login";
     }
 
     @RequestMapping("/foo")
