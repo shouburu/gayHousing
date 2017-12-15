@@ -66,7 +66,8 @@ public class WelcomeController {
     @RequestMapping("/login")
     public String login(Map<String,Object> model) {
 
-        return "login";
+        return "mat_login";
+//        return "login";
     }
 
     @RequestMapping("/foo")
