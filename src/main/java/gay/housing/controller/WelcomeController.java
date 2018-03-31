@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import gay.housing.sendgrid.LGBTEmails;
+
 import gay.housing.model.Users;
 import gay.housing.service.UsersService;
 import org.hibernate.Query;
@@ -18,10 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import gay.housing.PersistenceConfig;
 
 import javax.sql.DataSource;
-import javax.swing.plaf.nimbus.State;
 
 @Controller
 public class WelcomeController {
@@ -43,20 +43,25 @@ public class WelcomeController {
     @GetMapping("/")
     public String welcome(Map<String, Object> model) throws java.lang.Exception, java.sql.SQLException {
 
-//        Connection connection;
-//        Statement statement;
-//        ResultSet resultSet;
-//        connection = dataSource.getConnection();
-//        statement = connection.createStatement();
-//        statement.setQueryTimeout(15);
-//        resultSet = statement.executeQuery("SELECT * from users where user_id = 2");
-//        while(  resultSet.next() ) {
-//            System.out.println("There was something in result set");
-//            System.out.println(resultSet.getString(5));
-//        }
+        LGBTEmails lgbtEmails = new LGBTEmails();
+        lgbtEmails.testEmail();
+
+
+        Connection connection;
+        Statement statement;
+        ResultSet resultSet;
+        connection = dataSource.getConnection();
+        statement = connection.createStatement();
+        statement.setQueryTimeout(15);
+        resultSet = statement.executeQuery("SELECT * from users where user_id = 1");
+        while(  resultSet.next() ) {
+            System.out.println("There was something in result set");
+            System.out.println(resultSet.getString(5));
+        }
         System.out.println("Starting call");
 
-        Users user = usersService.get(new Integer(2));
+
+        Users user = usersService.get(new Integer(1));
         System.out.println("Finished user service" + user.getFirst_name());
         model.put("time", new Date());
         model.put("message", this.message);
