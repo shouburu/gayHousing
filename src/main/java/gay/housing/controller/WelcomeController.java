@@ -75,6 +75,13 @@ public class WelcomeController {
 //        return "login";
     }
 
+    @RequestMapping("/register")
+    public String register(Map<String,Object> model) {
+
+        return "register";
+//        return "login";
+    }
+
     @RequestMapping("/foo")
     public String foo(Map<String, Object> model) {
         throw new RuntimeException("Foo");
